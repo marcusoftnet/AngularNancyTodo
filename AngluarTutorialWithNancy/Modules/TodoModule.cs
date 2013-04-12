@@ -11,7 +11,7 @@ namespace AngluarTutorialWithNancy.Modules
 
         public TodoModule()
         {
-            Get["/"] = _ => { return View["Index", GetAllTodos()]; };
+            Get["/"] = _ => { return View["index", GetAllTodos()]; };
         }
 
         private List<TodoItem> GetAllTodos()
