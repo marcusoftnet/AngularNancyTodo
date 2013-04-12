@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using AngluarTutorialWithNancy.Models;
-using Nancy;
+﻿using Nancy;
 using Simple.Data;
 
 namespace AngluarTutorialWithNancy.Modules
@@ -9,15 +7,9 @@ namespace AngluarTutorialWithNancy.Modules
     {
         private dynamic _db = Database.Open();
 
-        public TodoModule()
+        public TodoModule() : base("/api/todo")
         {
-            Get["/"] = _ => { return View["index", GetAllTodos()]; };
-        }
-
-        private List<TodoItem> GetAllTodos()
-        {
-            return _db.TodoItems.All();
+            Get["/"] = _ => { return _db.TodoItems.All(); };
         }
     }
-
 }

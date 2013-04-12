@@ -94,7 +94,7 @@
     <Content Include="Scripts\angular-scenario.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
-    <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\TodoApp\app.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\i18n\angular-locale_am-et.js" />
@@ -257,7 +257,7 @@
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\jstd-scenario-adapter-config.js" />
     <Content Include="Scripts\jstd-scenario-adapter.js" />
-    <Content Include="Scripts\templates\list.html" />
+    <Content Include="Scripts\TodoApp\templates\list.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -269,6 +269,7 @@
   <ItemGroup>
     <Compile Include="Infrastructure\CustomBoostrapper.cs" />
     <Compile Include="Models\TodoItem.cs" />
+    <Compile Include="Modules\HomeModule.cs" />
     <Compile Include="Modules\TodoModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
