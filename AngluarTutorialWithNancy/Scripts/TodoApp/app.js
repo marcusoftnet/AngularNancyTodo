@@ -11,5 +11,9 @@ TodoApp.factory('Todo', function ($resource) {
 });
 
 var ListCtrl = function ($scope, $location, Todo) {
-    $scope.items = Todo.query();
+    $scope.reset = function () {
+        $scope.items = Todo.query({ q: $scope.query });
+    };
+
+    $scope.reset();
 };
