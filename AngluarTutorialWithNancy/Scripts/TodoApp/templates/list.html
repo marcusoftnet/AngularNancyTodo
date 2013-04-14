@@ -5,11 +5,13 @@
     </div>
     <button ng-click="query=''; reset()" ng-disabled="!query" type="submit" class="btn">Reset</button>
 </form>
+
+<!-- The list of Todo's -->
 <table class="table table-striped table-condensed table-hover">
     <thead>
-        <th>Todo</th>
-        <th>Priority</th>
-        <th>Due</th>
+        <th sorted="Todo">Todo</th>
+        <th sorted="Priority">Priority</th>
+        <th sorted="DueDate">DueDate</th>        
     </thead>
     <tbody>
         <tr ng-repeat="item in items">

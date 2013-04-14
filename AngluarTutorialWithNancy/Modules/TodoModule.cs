@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AngluarTutorialWithNancy.Models;
 using Nancy;
 using Simple.Data;
@@ -36,16 +37,34 @@ namespace AngluarTutorialWithNancy.Modules
         }
 
         public dynamic Q { get { return Request.Query.q; } }
-        public dynamic Limit { get { return Request.Query.limit; } }
-        public dynamic Offset { get { return Request.Query.offset; } }
+        public dynamic Limit { get { return Request.Query.Limit; } }
+        public dynamic Offset { get { return Request.Query.Offset; } }
+        public dynamic SortField { get { return Request.Query.Sort; } }
+        public dynamic Desc { get { return Request.Query.Desc; } }
 
         private List<TodoItem> GetTodos()
         {
+            if(Desc)
+                return _db.TodoItems
+                        .All()
+                        .Where(GetWhere())
+                        .Take(Limit)
+                        .Skip(Offset)
+                        .OrderByDescending(_db.TodoItems[SortField]);
+
             return _db.TodoItems
                         .All()
                         .Where(GetWhere())
                         .Take(Limit)
-                        .Skip(Offset);
+                        .Skip(Offset)
+                        .OrderBy(_db.TodoItems[SortField]);
+        }
+
+        private OrderByClause GetOrderBy()
+        {
+            var direction = Desc ? OrderByDirection.Descending : OrderByDirection.Ascending;
+            var orderby = new OrderByClause(_db.TodoItems[SortField], direction);
+            return orderby;
         }
 
         private SimpleExpression GetWhere()
