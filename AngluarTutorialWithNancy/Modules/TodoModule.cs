@@ -36,17 +36,31 @@ namespace AngluarTutorialWithNancy.Modules
         }
 
         public dynamic Q { get { return Request.Query.q; } }
+        public dynamic Limit { get { return Request.Query.limit; } }
+        public dynamic Offset { get { return Request.Query.offset; } }
 
         private List<TodoItem> GetTodos()
         {
+            return _db.TodoItems
+                        .All()
+                        .Where(GetWhere())
+                        .Take(Limit)
+                        .Skip(Offset);
+        }
+
+        private SimpleExpression GetWhere()
+        {
+            // This is just a default expression that matches everything
+            // not sure I like this but it works
+            var where = new SimpleExpression("1", "1", SimpleExpressionType.Equal);
+
             if(Q.HasValue && Q != "undefined")
             {
-                return _db.TodoItems
-                            .All()
-                            .Where(_db.TodoItems.Todo.Like("%" + Q + "%"));
+                // If we have a query we'll overwrite the WHERE-part
+                // with the one doing the search
+                where = _db.TodoItems.Todo.Like("%" + Q + "%");
             }
-
-            return _db.TodoItems.All();
+            return where;
         }
     }
 }
